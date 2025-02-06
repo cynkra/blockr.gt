@@ -14,15 +14,15 @@ new_complete_gt_block <- function(title = character(), subtitle = character(), f
         label = "Add footnores (accepts markdown formatting)",
       ),
       gt_output(
-        NS(id, "gt_output")
+        NS(id, "table")
       )
     )
   }
 
-  server <- function(id) {
+  server <- function(id, data) {
     moduleServer(id, function(input, output, session) {
-      render_gt({
-        head(mtcars, 5) |>
+      output$table <- render_gt({
+        head(data, 5) |>
           gt() |>
           tab_header(title = md(input$title), subtitle = md(input$subtitle)) |>
           tab_footnote(md(input$footnotes))
@@ -42,15 +42,15 @@ new_complete_gt_block <- function(title = character(), subtitle = character(), f
           )
         ),
         state = list(
-          input$title,
-          input$subtitle,
-          input$footnotes
+          title = reactive(input$title),
+          subtitle = reactive(input$subtitle),
+          footnotes = reactive(input$footnotes)
         )
       )
     })
   }
 
-  new_block(
-    ui = ui, server = server, class = "complete_gt_block", ctor = sys.parent()
+  new_transform_block(
+    ui = ui, server = server, class = "complete_gt_block"
   )
 }
