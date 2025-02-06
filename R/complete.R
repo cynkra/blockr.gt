@@ -50,5 +50,7 @@ new_complete_gt_block <- function(title = character(), subtitle = character(), f
     })
   }
 
-  new_block(ui = ui, server = server, class = "complete_gt_block")
+  new_block(
+    ui = ui, server = server, class = "complete_gt_block", ctor = sys.parent()
+  )
 }
