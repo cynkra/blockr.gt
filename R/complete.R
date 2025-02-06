@@ -22,8 +22,7 @@ new_complete_gt_block <- function(title = character(), subtitle = character(), f
   server <- function(id, data) {
     moduleServer(id, function(input, output, session) {
       output$table <- render_gt({
-        head(data, 5) |>
-          gt() |>
+        gt(head(data())) |>
           tab_header(title = md(input$title), subtitle = md(input$subtitle)) |>
           tab_footnote(md(input$footnotes))
       })
@@ -31,7 +30,7 @@ new_complete_gt_block <- function(title = character(), subtitle = character(), f
       list(
         expr = reactive(
           bquote(
-            gt() |>
+            gt(data) |>
               tab_header(title = md(.(title)), subtitle = md(.subtitle)) |>
               tab_footnote(md(.footnotes)),
             list(
