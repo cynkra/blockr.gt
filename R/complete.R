@@ -65,7 +65,11 @@ new_complete_gt_block <- function(title = character(), subtitle = character(), f
     })
   }
 
-  new_transform_block(
-    ui = ui, server = server, class = "complete_gt_block"
+  new_block(
+    ui = ui,
+    server = server,
+    class = "complete_gt_block",
+    ctor = "new_complete_gt_block",
+    ctor_pkg = "blockr.gt"
   )
 }
