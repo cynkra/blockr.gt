@@ -50,7 +50,7 @@ new_save_gt_block <- function(format = character(), filename = character(), expa
       observeEvent(input$expand, expand(input$expand))
 
       output$download <- downloadHandler(
-        filename = paste0(filename(), ".", format()),
+        filename = reactive(paste0(filename(), ".", format())),
         content = \(file) {
           switch(format(),
             pdf = gtsave(gt_obj(), filename = file),
