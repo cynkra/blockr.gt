@@ -26,7 +26,7 @@ new_save_gt_block <- function(format = character(), filename = character(), expa
         label = "PNG files are often Cropped. Set whitespace with an expansion factor.",
         value = 10
       ),
-      downloadLink(
+      downloadButton(
         NS(id, "download"),
         "Download table"
       )
