@@ -3,7 +3,7 @@
 #' This block takes a gt table object and saves it to file in the specified
 #' format(s). Supports HTML, PDF, and PNG output formats.
 #'
-#' @param formats Vector of formats to save ("html", "pdf", "png")
+#' @param format Vector of formats to save ("html", "pdf", "png")
 #' @param filename Base filename for the output (without extension)
 #' @param expand Numeric, expansion factor for PNG output (default 10)
 #'
