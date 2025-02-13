@@ -55,7 +55,23 @@ new_save_gt_block <- function(format = character(), filename = character(), expa
       )
 
       list(
-        expr = "create expression here",
+        expr = reactive(
+          bquote(
+            {
+              file <- paste0(.(filename), ".", .(format))
+              switch(.(format),
+                pdf = gtsave(gt_obj, filename = file),
+                html = gtsave(gt_obj, filename = file, inline_css = TRUE),
+                png = gtsave(gt_obj, filename = file, expand = .(expand))
+              )
+            },
+            list(
+              format = format(),
+              filename = filename(),
+              expand = expand()
+            )
+          )
+        ),
         state = list(
           format = reactive(format()),
           filename = reactive(filename()),
