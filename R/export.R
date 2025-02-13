@@ -23,7 +23,12 @@ new_save_gt_block <- function(format = character(), filename = character(), expa
       ),
       numericInput(
         NS(id, "expand"),
-        label = "PNG files are often Cropped. Set whitespace with an expansion factor."
+        label = "PNG files are often Cropped. Set whitespace with an expansion factor.",
+        value = 10
+      ),
+      downloadLink(
+        NS(id, "download"),
+        "Download table"
       )
     )
   }
@@ -38,13 +43,16 @@ new_save_gt_block <- function(format = character(), filename = character(), expa
       observeEvent(input$filename, filename(input$filename))
       observeEvent(input$expand, expand(input$expand))
 
-      # Alter gtsave call depending upon input format
-      # gtsave(gt_obj, filename = "gt-table.html", inline_css = TRUE)
-      # gtsave(gt_obj, filename = "gt-table.pdf")
-      # gtsave(gt_obj, filename = "gt-table.png", expand = 10)
-
-      # Make call to shiny::downloadHandler() to manage file download. An action
-      # button should be added to the UI to trigger the download.
+      output$download <- downloadHandler(
+        filename = paste0(filename(), ".", format()),
+        content = \(file) {
+          switch(format(),
+            pdf = gtsave(gt_obj, filename = file),
+            html = gtsave(gt_obj, filename = file, inline_css = TRUE),
+            png = gtsave(gt_obj, filename = file, expand = expand())
+          )
+        }
+      )
 
       list(
         expr = "create expression here",
