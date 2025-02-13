@@ -60,10 +60,6 @@ new_save_gt_block <- function(format = character(), filename = character(), expa
         }
       )
 
-      # FIXME: the expr causes a file to be downloaded to "/", anytime any of
-      # the reactives change.
-      # ISSUE: why is the expression running anyway? Should it not just be
-      # captured without being evaluated?
       list(
         expr = reactive(
           bquote(
@@ -81,7 +77,8 @@ new_save_gt_block <- function(format = character(), filename = character(), expa
               expand = expand()
             )
           )
-        ),
+        ) |>
+          bindEvent(output$download),
         state = list(
           format = reactive(format()),
           filename = reactive(filename()),
