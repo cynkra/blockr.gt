@@ -4,7 +4,6 @@
 #' format(s). Supports HTML, PDF, and PNG output formats.
 #'
 #' @param format Vector of formats to save ("html", "pdf", "png")
-#' @param filename Base filename for the output (without extension)
 #' @param expand Numeric, expansion factor for PNG output (default 10)
 #'
 #' @return Invisibly returns NULL, called for side effects
@@ -15,11 +14,7 @@
 #' }
 #'
 #' @export
-new_save_gt_block <- function(
-  format = character(),
-  filename = character(),
-  expand = numeric()
-) {
+new_save_gt_block <- function(format = character(), expand = numeric()) {
   ui <- function(id) {
     tagList(
       selectInput(
@@ -27,14 +22,12 @@ new_save_gt_block <- function(
         label = "File format",
         choices = c("pdf", "html", "png")
       ),
-      textInput(
-        NS(id, "filename"),
-        label = "Filename, without extension"
-      ),
       numericInput(
         NS(id, "expand"),
-        label = "PNG files are often Cropped. Set whitespace with an expansion factor.",
-        value = 10
+        label = "Expansion factor to prevent cropping (png only)",
+        value = 10,
+        min = 1,
+        max = 100
       ),
       downloadButton(
         NS(id, "download"),
@@ -46,15 +39,13 @@ new_save_gt_block <- function(
   server <- function(id, gt_obj) {
     moduleServer(id, function(input, output, session) {
       format <- reactiveVal(format)
-      filename <- reactiveVal(filename)
       expand <- reactiveVal(expand)
 
       observeEvent(input$format, format(input$format))
-      observeEvent(input$filename, filename(input$filename))
       observeEvent(input$expand, expand(input$expand))
 
       output$download <- downloadHandler(
-        filename = reactive(paste0(filename(), ".", format())),
+        filename = reactive(paste0("gt-table", ".", format())),
         content = \(file) {
           switch(
             format(),
@@ -69,7 +60,7 @@ new_save_gt_block <- function(
         expr = reactive(
           bquote(
             {
-              file <- paste0(.(filename), ".", .(format))
+              file <- paste0("gt-table", ".", .(format))
               switch(
                 .(format),
                 pdf = gtsave(gt_obj, filename = file),
@@ -79,7 +70,6 @@ new_save_gt_block <- function(
             },
             list(
               format = format(),
-              filename = filename(),
               expand = expand()
             )
           )
@@ -87,7 +77,6 @@ new_save_gt_block <- function(
           bindEvent(output$download),
         state = list(
           format = reactive(format()),
-          filename = reactive(filename()),
           expand = reactive(expand())
         )
       )
