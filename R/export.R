@@ -85,7 +85,7 @@ new_save_gt_block <- function(format = character(), filename = character(), expa
     ui = ui,
     server = server,
     class = "save_gt_block",
-    ctor = "new_complete_gt_block",
+    ctor = "new_save_gt_block",
     ctor_pkg = "blockr.gt"
   )
 }
