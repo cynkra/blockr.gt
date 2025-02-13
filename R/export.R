@@ -54,6 +54,8 @@ new_save_gt_block <- function(format = character(), filename = character(), expa
         }
       )
 
+      # FIXME: the expr causes a file to be downloaded to "/", anytime any of
+      # the reactives change.
       list(
         expr = reactive(
           bquote(
