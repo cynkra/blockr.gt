@@ -49,8 +49,6 @@ new_save_gt_block <- function(format = character(), filename = character(), expa
       observeEvent(input$filename, filename(input$filename))
       observeEvent(input$expand, expand(input$expand))
 
-      # FIXME: Error in gtsave: `data` must either be a `gt_tbl` or a
-      # `gt_group`, not a <reactiveVal> object.
       output$download <- downloadHandler(
         filename = paste0(filename(), ".", format()),
         content = \(file) {
