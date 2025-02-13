@@ -15,7 +15,11 @@
 #' }
 #'
 #' @export
-new_save_gt_block <- function(format = character(), filename = character(), expand = numeric()) {
+new_save_gt_block <- function(
+  format = character(),
+  filename = character(),
+  expand = numeric()
+) {
   ui <- function(id) {
     tagList(
       selectInput(
@@ -52,7 +56,8 @@ new_save_gt_block <- function(format = character(), filename = character(), expa
       output$download <- downloadHandler(
         filename = reactive(paste0(filename(), ".", format())),
         content = \(file) {
-          switch(format(),
+          switch(
+            format(),
             pdf = gtsave(gt_obj(), filename = file),
             html = gtsave(gt_obj(), filename = file, inline_css = TRUE),
             png = gtsave(gt_obj(), filename = file, expand = expand())
@@ -65,7 +70,8 @@ new_save_gt_block <- function(format = character(), filename = character(), expa
           bquote(
             {
               file <- paste0(.(filename), ".", .(format))
-              switch(.(format),
+              switch(
+                .(format),
                 pdf = gtsave(gt_obj, filename = file),
                 html = gtsave(gt_obj, filename = file, inline_css = TRUE),
                 png = gtsave(gt_obj, filename = file, expand = .(expand))
