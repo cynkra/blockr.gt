@@ -57,8 +57,8 @@ new_complete_gt_block <- function(title = character(), subtitle = character(), f
         expr = reactive(
           bquote(
             gt(data) |>
-              tab_header(title = md(.(title)), subtitle = md(.subtitle)) |>
-              tab_footnote(md(.footnotes)),
+              tab_header(title = md(.(title)), subtitle = md(.(subtitle))) |>
+              tab_footnote(md(.(footnotes))),
             list(
               title = title(),
               subtitle = subtitle(),
