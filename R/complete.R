@@ -14,7 +14,11 @@
 #' }
 #'
 #' @export
-new_complete_gt_block <- function(title = character(), subtitle = character(), footnotes = character()) {
+new_complete_gt_block <- function(
+  title = character(),
+  subtitle = character(),
+  footnotes = character()
+) {
   ui <- function(id) {
     tagList(
       textInput(
