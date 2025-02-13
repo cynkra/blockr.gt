@@ -57,7 +57,9 @@ new_save_gt_block <- function(format = character(), filename = character(), expa
       list(
         expr = "create expression here",
         state = list(
-          format = "reactive format variable goes here"
+          format = reactive(format()),
+          filename = reactive(filename()),
+          expand = reactive(expand())
         )
       )
     })
