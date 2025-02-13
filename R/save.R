@@ -55,9 +55,9 @@ new_save_gt_block <- function(format = character(), filename = character(), expa
         filename = paste0(filename(), ".", format()),
         content = \(file) {
           switch(format(),
-            pdf = gtsave(gt_obj, filename = file),
-            html = gtsave(gt_obj, filename = file, inline_css = TRUE),
-            png = gtsave(gt_obj, filename = file, expand = expand())
+            pdf = gtsave(gt_obj(), filename = file),
+            html = gtsave(gt_obj(), filename = file, inline_css = TRUE),
+            png = gtsave(gt_obj(), filename = file, expand = expand())
           )
         }
       )
