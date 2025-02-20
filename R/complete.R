@@ -14,7 +14,11 @@
 #' }
 #'
 #' @export
-new_complete_gt_block <- function(title = character(), subtitle = character(), footnotes = character()) {
+new_complete_gt_block <- function(
+  title = character(),
+  subtitle = character(),
+  footnotes = character()
+) {
   ui <- function(id) {
     tagList(
       textInput(
@@ -48,7 +52,7 @@ new_complete_gt_block <- function(title = character(), subtitle = character(), f
       observeEvent(input$footnotes, footnotes(input$footnotes))
 
       output$table <- render_gt({
-        gt(head(data())) |>
+        gt(data()) |>
           tab_header(title = md(title()), subtitle = md(subtitle())) |>
           tab_footnote(md(footnotes()))
       })
@@ -57,8 +61,8 @@ new_complete_gt_block <- function(title = character(), subtitle = character(), f
         expr = reactive(
           bquote(
             gt(data) |>
-              tab_header(title = md(.(title)), subtitle = md(.subtitle)) |>
-              tab_footnote(md(.footnotes)),
+              tab_header(title = md(.(title)), subtitle = md(.(subtitle))) |>
+              tab_footnote(md(.(footnotes))),
             list(
               title = title(),
               subtitle = subtitle(),
