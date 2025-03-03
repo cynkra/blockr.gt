@@ -63,9 +63,9 @@ new_save_gt_block <- function(format = character(), expand = numeric()) {
               file <- paste0("gt-table", ".", .(format))
               switch(
                 .(format),
-                pdf = gtsave(gt_obj, filename = file),
-                html = gtsave(gt_obj, filename = file, inline_css = TRUE),
-                png = gtsave(gt_obj, filename = file, expand = .(expand))
+                pdf = gtsave(gt_obj(), filename = file),
+                html = gtsave(gt_obj(), filename = file, inline_css = TRUE),
+                png = gtsave(gt_obj(), filename = file, expand = .(expand))
               )
             },
             list(
