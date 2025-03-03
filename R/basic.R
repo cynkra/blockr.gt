@@ -60,7 +60,7 @@ new_basic_gt_block <- function(
       list(
         expr = reactive(
           bquote(
-            gt(data) |>
+            gt(data()) |>
               tab_header(title = md(.(title)), subtitle = md(.(subtitle))) |>
               tab_footnote(md(.(footnotes))),
             list(
