@@ -64,3 +64,17 @@ test_that("block state is correctly returned", {
     }
   )
 })
+
+test_that("expr evaluates correctly", {
+  testServer(
+    app = new_basic_gt_block()$expr_server,
+    args = list(data = reactive(mtcars)),
+    expr = {
+      session$setInputs(title = "Test Title")
+      session$setInputs(subtitle = "Test Subtitle")
+      session$setInputs(footnotes = "Test Footnote")
+      evaluated_expr <- eval(session$returned$expr())
+      expect_s3_class(evaluated_expr, "gt_tbl")
+    }
+  )
+})
