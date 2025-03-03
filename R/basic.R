@@ -1,20 +1,20 @@
-#' Create a new complete GT block
+#' Create a new basic GT block
 #'
 #' Creates a new GT block with inputs for title, subtitle, and footnotes. This
-#' block provides a complete interface for a basic GT table.
+#' block provides an interface for a basic GT table.
 #'
 #' @param title,subtitle,footnotes Initial text for each field (character).
 #' All default to empty and accept markdown formatting.
 #'
-#' @return A transform block object that can be used with the serve function.
+#' @return A basic gt block object that can be used with the serve function.
 #'
 #' @examples
 #' \dontrun{
-#' serve(new_complete_gt_block(), list(data = mtcars))
+#' serve(new_basic_gt_block(), list(data = mtcars))
 #' }
 #'
 #' @export
-new_complete_gt_block <- function(
+new_basic_gt_block <- function(
   title = character(),
   subtitle = character(),
   footnotes = character()
@@ -82,8 +82,8 @@ new_complete_gt_block <- function(
   new_block(
     ui = ui,
     server = server,
-    class = "complete_gt_block",
-    ctor = "new_complete_gt_block",
+    class = "basic_gt_block",
+    ctor = "new_basic_gt_block",
     ctor_pkg = "blockr.gt"
   )
 }

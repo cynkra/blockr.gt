@@ -4,16 +4,10 @@
 \alias{new_save_gt_block}
 \title{Save a gt table to multiple formats}
 \usage{
-new_save_gt_block(
-  format = character(),
-  filename = character(),
-  expand = numeric()
-)
+new_save_gt_block(format = character(), expand = numeric())
 }
 \arguments{
 \item{format}{Vector of formats to save ("html", "pdf", "png")}
-
-\item{filename}{Base filename for the output (without extension)}
 
 \item{expand}{Numeric, expansion factor for PNG output (default 10)}
 }

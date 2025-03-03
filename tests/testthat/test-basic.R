@@ -1,10 +1,10 @@
-test_that("complete block constructor", {
-  expect_s3_class(new_complete_gt_block(), "complete_gt_block")
+test_that("basic block constructor", {
+  expect_s3_class(new_basic_gt_block(), "basic_gt_block")
 })
 
-test_that("complete block server handles title changes", {
+test_that("basic block server handles title changes", {
   testServer(
-    app = new_complete_gt_block()$expr_server,
+    app = new_basic_gt_block()$expr_server,
     args = list(data = reactive(mtcars)),
     expr = {
       session$setInputs(title = "New Title")
@@ -16,9 +16,9 @@ test_that("complete block server handles title changes", {
   )
 })
 
-test_that("complete block server handles subtitle changes", {
+test_that("basic block server handles subtitle changes", {
   testServer(
-    app = new_complete_gt_block()$expr_server,
+    app = new_basic_gt_block()$expr_server,
     args = list(data = reactive(mtcars)),
     expr = {
       session$setInputs(subtitle = "New Subtitle")
@@ -30,9 +30,9 @@ test_that("complete block server handles subtitle changes", {
   )
 })
 
-test_that("complete block server handles footnotes changes", {
+test_that("basic block server handles footnotes changes", {
   testServer(
-    app = new_complete_gt_block()$expr_server,
+    app = new_basic_gt_block()$expr_server,
     args = list(data = reactive(mtcars)),
     expr = {
       session$setInputs(footnotes = "New Footnote")
@@ -46,7 +46,7 @@ test_that("complete block server handles footnotes changes", {
 
 test_that("block state is correctly returned", {
   testServer(
-    app = new_complete_gt_block()$expr_server,
+    app = new_basic_gt_block()$expr_server,
     args = list(data = reactive(mtcars)),
     expr = {
       expect_equal(session$returned$state$title(), character())
