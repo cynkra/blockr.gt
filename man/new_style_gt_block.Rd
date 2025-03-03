@@ -7,7 +7,7 @@
 new_style_gt_block(
   style = numeric(),
   color = character(),
-  striping = logical()
+  striping = character()
 )
 }
 \arguments{

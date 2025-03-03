@@ -19,7 +19,7 @@
 new_style_gt_block <- function(
   style = numeric(),
   color = character(),
-  striping = logical()
+  striping = character()
 ) {
   ui <- function(id) {
     tagList(
