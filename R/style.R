@@ -1,3 +1,21 @@
+#' Style a GT block
+#'
+#' Style a GT block using one of six prebuilt defaults with further options to
+#' control the table colour and row striping.
+#'
+#' @param style Numeric from 1 to 6 indicating which prebuilt default to use.
+#' @param color One of "blue", "cyan", "pink", "green", "red", and "gray".
+#' @param add_row_striping Logical indicating whether optional row striping
+#'   should be enabled.
+#'
+#' @return A styled gt block object that can be used with the serve function.
+#'
+#' @examples
+#' \dontrun{
+#' serve(new_style_gt_block(), list(gt_obj = gt::gt(head(mtcars))))
+#' }
+#'
+#' @export
 new_style_gt_block <- function(
   style = numeric(),
   color = character(),

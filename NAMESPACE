@@ -2,6 +2,7 @@
 
 export(new_basic_gt_block)
 export(new_save_gt_block)
+export(new_style_gt_block)
 import(blockr.core)
 import(gt)
 import(shiny)
