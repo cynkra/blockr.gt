@@ -7,7 +7,7 @@
 new_style_gt_block(
   style = numeric(),
   color = character(),
-  add_row_striping = logical()
+  striping = logical()
 )
 }
 \arguments{
@@ -15,7 +15,7 @@ new_style_gt_block(
 
 \item{color}{One of "blue", "cyan", "pink", "green", "red", and "gray".}
 
-\item{add_row_striping}{Logical indicating whether optional row striping
+\item{striping}{Logical indicating whether optional row striping
 should be enabled.}
 }
 \value{

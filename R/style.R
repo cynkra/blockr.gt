@@ -5,7 +5,7 @@
 #'
 #' @param style Numeric from 1 to 6 indicating which prebuilt default to use.
 #' @param color One of "blue", "cyan", "pink", "green", "red", and "gray".
-#' @param add_row_striping Logical indicating whether optional row striping
+#' @param striping Logical indicating whether optional row striping
 #'   should be enabled.
 #'
 #' @return A styled gt block object that can be used with the serve function.
@@ -19,7 +19,7 @@
 new_style_gt_block <- function(
   style = numeric(),
   color = character(),
-  add_row_striping = logical()
+  striping = logical()
 ) {
   ui <- function(id) {
     tagList(
