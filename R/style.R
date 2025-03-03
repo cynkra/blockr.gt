@@ -62,7 +62,7 @@ new_style_gt_block <- function(
       observeEvent(input$striping, striping(input$striping))
 
       output$table <- render_gt({
-        gt(gt_obj()) |>
+        gt_obj() |>
           opt_stylize(
             style = style(),
             color = color(),
