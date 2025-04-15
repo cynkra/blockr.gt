@@ -1,6 +1,6 @@
 register_gt_blocks <- function() {
   blockr.core::register_blocks(
-    ctor = c(
+    c(
       "new_basic_gt_block",
       "new_save_gt_block",
       "new_style_gt_block"
