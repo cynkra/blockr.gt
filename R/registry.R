@@ -1,9 +1,9 @@
 register_gt_blocks <- function() {
   blockr.core::register_blocks(
     ctor = c(
-      "basic_gt_block",
-      "save_gt_block",
-      "style_gt_block"
+      "new_basic_gt_block",
+      "new_save_gt_block",
+      "new_style_gt_block"
     ),
     name = c(
       "Basic GT Table",
