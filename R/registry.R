@@ -15,6 +15,7 @@ register_gt_blocks <- function() {
       "Save a GT table",
       "Style a GT table"
     ),
+    package = utils::packageName(),
     overwrite = TRUE
   )
 }
