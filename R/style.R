@@ -95,11 +95,9 @@ new_style_gt_block <- function(
     })
   }
 
-  new_block(
+  new_gt_block(
     ui = ui,
     server = server,
-    class = "style_gt_block",
-    ctor = "new_style_gt_block",
-    ctor_pkg = "blockr.gt"
+    class = "style_block"
   )
 }

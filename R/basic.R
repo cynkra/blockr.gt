@@ -79,11 +79,9 @@ new_basic_gt_block <- function(
     })
   }
 
-  new_block(
+  new_gt_block(
     ui = ui,
     server = server,
-    class = "basic_gt_block",
-    ctor = "new_basic_gt_block",
-    ctor_pkg = "blockr.gt"
+    class = "basic_block"
   )
 }

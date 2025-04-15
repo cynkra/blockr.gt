@@ -83,11 +83,9 @@ new_save_gt_block <- function(format = character(), expand = numeric()) {
     })
   }
 
-  new_block(
+  new_gt_block(
     ui = ui,
     server = server,
-    class = "save_gt_block",
-    ctor = "new_save_gt_block",
-    ctor_pkg = "blockr.gt"
+    class = "save_block"
   )
 }
