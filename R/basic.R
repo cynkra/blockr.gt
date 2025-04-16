@@ -31,7 +31,7 @@ new_basic_gt_block <- function(
       ),
       textInput(
         NS(id, "footnotes"),
-        label = "Add footnores (accepts markdown formatting)",
+        label = "Add footnotes (accepts markdown formatting)",
       ),
       gt_output(
         NS(id, "table")
