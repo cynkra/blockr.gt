@@ -10,7 +10,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' serve(new_basic_gt_block(), list(data = mtcars))
+#' serve(new_basic_gt_block(), data = list(data = mtcars))
 #' }
 #'
 #' @export
