@@ -53,7 +53,7 @@ test_that("block state is correctly returned", {
 test_that("expr evaluates correctly", {
   testServer(
     app = new_save_gt_block()$expr_server,
-    args = list(gt_obj = reactive(gt::gt(mtcars))),
+    args = list(gt_obj = reactive(gt::gt(head(mtcars, 5)))),
     expr = {
       withr::with_tempdir({
         session$setInputs(format = "png")
