@@ -5,6 +5,7 @@
 #'
 #' @param format Vector of formats to save ("html", "pdf", "png")
 #' @param expand Numeric, expansion factor for PNG output (default 10)
+#' @param ... Forwarded to [new_block()]
 #'
 #' @return Invisibly returns NULL, called for side effects
 #'
@@ -14,7 +15,7 @@
 #' }
 #'
 #' @export
-new_save_gt_block <- function(format = character(), expand = numeric()) {
+new_save_gt_block <- function(format = character(), expand = numeric(), ...) {
   ui <- function(id) {
     tagList(
       selectInput(
@@ -86,6 +87,7 @@ new_save_gt_block <- function(format = character(), expand = numeric()) {
   new_gt_block(
     ui = ui,
     server = server,
-    class = "save_block"
+    class = "save_block",
+    ...
   )
 }

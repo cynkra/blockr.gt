@@ -4,12 +4,14 @@
 \alias{new_save_gt_block}
 \title{Save a gt table to multiple formats}
 \usage{
-new_save_gt_block(format = character(), expand = numeric())
+new_save_gt_block(format = character(), expand = numeric(), ...)
 }
 \arguments{
 \item{format}{Vector of formats to save ("html", "pdf", "png")}
 
 \item{expand}{Numeric, expansion factor for PNG output (default 10)}
+
+\item{...}{Forwarded to \code{\link[=new_block]{new_block()}}}
 }
 \value{
 Invisibly returns NULL, called for side effects
@@ -20,7 +22,7 @@ format(s). Supports HTML, PDF, and PNG output formats.
 }
 \examples{
 \dontrun{
-serve(new_save_gt_block(), list(gt_obj = gt::gt(mtcars)))
+serve(new_save_gt_block(), data = list(gt_obj = gt::gt(mtcars)))
 }
 
 }

@@ -7,12 +7,15 @@
 new_basic_gt_block(
   title = character(),
   subtitle = character(),
-  footnotes = character()
+  footnotes = character(),
+  ...
 )
 }
 \arguments{
 \item{title, subtitle, footnotes}{Initial text for each field (character).
 All default to empty and accept markdown formatting.}
+
+\item{...}{Forwarded to \code{\link[=new_block]{new_block()}}}
 }
 \value{
 A basic gt block object that can be used with the serve function.
@@ -23,7 +26,7 @@ block provides an interface for a basic GT table.
 }
 \examples{
 \dontrun{
-serve(new_basic_gt_block(), list(data = mtcars))
+serve(new_basic_gt_block(), data = list(data = mtcars))
 }
 
 }

@@ -1,5 +1,5 @@
 test_that("basic block constructor", {
-  expect_s3_class(new_basic_gt_block(), "basic_gt_block")
+  expect_s3_class(new_basic_gt_block(), "basic_block")
 })
 
 test_that("basic block server handles title changes", {

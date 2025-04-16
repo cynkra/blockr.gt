@@ -1,5 +1,5 @@
 test_that("style block constructor", {
-  expect_s3_class(new_style_gt_block(), "style_gt_block")
+  expect_s3_class(new_style_gt_block(), "style_block")
 })
 
 test_that("style block server handles style changes", {

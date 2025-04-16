@@ -7,7 +7,8 @@
 new_style_gt_block(
   style = numeric(),
   color = character(),
-  striping = character()
+  striping = character(),
+  ...
 )
 }
 \arguments{
@@ -17,6 +18,8 @@ new_style_gt_block(
 
 \item{striping}{Logical indicating whether optional row striping
 should be enabled.}
+
+\item{...}{Forwarded to \code{\link[=new_block]{new_block()}}}
 }
 \value{
 A styled gt block object that can be used with the serve function.
@@ -27,7 +30,7 @@ control the table colour and row striping.
 }
 \examples{
 \dontrun{
-serve(new_style_gt_block(), list(gt_obj = gt::gt(head(mtcars))))
+serve(new_style_gt_block(), data = list(gt_obj = gt::gt(head(mtcars))))
 }
 
 }
