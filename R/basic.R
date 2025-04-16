@@ -5,6 +5,7 @@
 #'
 #' @param title,subtitle,footnotes Initial text for each field (character).
 #' All default to empty and accept markdown formatting.
+#' @param ... Forwarded to [new_block()]
 #'
 #' @return A basic gt block object that can be used with the serve function.
 #'
@@ -17,7 +18,8 @@
 new_basic_gt_block <- function(
   title = character(),
   subtitle = character(),
-  footnotes = character()
+  footnotes = character(),
+  ...
 ) {
   ui <- function(id) {
     tagList(
@@ -79,11 +81,10 @@ new_basic_gt_block <- function(
     })
   }
 
-  new_block(
+  new_gt_block(
     ui = ui,
     server = server,
-    class = "basic_gt_block",
-    ctor = "new_basic_gt_block",
-    ctor_pkg = "blockr.gt"
+    class = "basic_block",
+    ...
   )
 }

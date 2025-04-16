@@ -1,5 +1,5 @@
 test_that("save block constructor", {
-  expect_s3_class(new_save_gt_block(), "save_gt_block")
+  expect_s3_class(new_save_gt_block(), "save_block")
 })
 
 test_that("save block server handles format changes", {
