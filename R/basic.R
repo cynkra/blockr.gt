@@ -11,7 +11,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' serve(new_basic_gt_block(), data = list(data = mtcars))
+#' serve(new_basic_gt_block(title = "test"), data = list(data = mtcars))
 #' }
 #'
 #' @export
@@ -25,15 +25,18 @@ new_basic_gt_block <- function(
     tagList(
       textInput(
         NS(id, "title"),
-        label = "Add title (accepts markdown formatting)"
+        label = "Add title (accepts markdown formatting)",
+        value = title
       ),
       textInput(
         NS(id, "subtitle"),
-        label = "Add subtitle (accepts markdown formatting)"
+        label = "Add subtitle (accepts markdown formatting)",
+        value = subtitle
       ),
       textInput(
         NS(id, "footnotes"),
         label = "Add footnotes (accepts markdown formatting)",
+        value = footnotes
       ),
       gt_output(
         NS(id, "table")
