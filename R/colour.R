@@ -139,7 +139,19 @@ new_colour_gt_block <- function(
       )
 
       output$table <- render_gt({
-        gt_obj()
+        gt_obj() |>
+          data_color(
+            columns = input$columns,
+            rows = input$rows,
+            direction = input$direction,
+            method = input$method,
+            palette = input$palette,
+            bins = input$bins,
+            quantiles = input$quantiles,
+            alpha = input$alpha,
+            reverse = input$reverse,
+            apply_to = input$apply_to
+          )
       })
 
       list(
