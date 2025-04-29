@@ -3,12 +3,11 @@
 #' Color targeted cells in a GT block.
 #'
 #' @param columns The columns to which cell data color operations are
-#'   constrained. Defaults to everything.
-#' @param rows In conjunction with columns, we can specify which of their rows
-#'   should form a constraint for cell data color operations. Defaults to
-#'   everything().
-#' @param direction Should the color computations be performed column-wise or
-#'   row-wise? Defeaults to colour down columns.
+#'   constrained.
+#' @param rows In conjunction with columns, we can specify which rows should
+#'   form a constraint for cell data color operations. Defaults to everything.
+#' @param direction Should the color computations be performed column-wise
+#'   (default) or row-wise? Defeaults to colour down columns.
 #' @param method A method for computing color based on the data within body
 #'   cells. Can be "auto" (the default), "numeric", "bin", "quantile", or
 #'   "factor". The "auto" method will automatically choose the "numeric" method
@@ -30,10 +29,100 @@ new_colour_gt_block <- function(
   direction = character(),
   method = character(),
   palette = character(),
+  bins = integer(),
+  quantiles = integer(),
+  alpha = numeric(),
+  reverse = logical(),
+  apply_to = character(),
   ...
 ) {
   ui <- function(id) {
     tagList(
+      selectInput(
+        NS(id, columns),
+        label = "Select columns to color:",
+        choices = NULL,
+        multiple = TRUE
+      ),
+      selectInput(
+        NS(id, rows),
+        label = "Select rows to color:",
+        choices = NULL,
+        multiple = TRUE
+      ),
+      selectInput(
+        NS(id, "direction"),
+        label = "Should color computations be performed down columns or across rows?",
+        choices = c("columns", "row")
+      ),
+      selectInput(
+        NS(id, "method"),
+        label = "Select method for computing color:",
+        choices = c("auto", "numeric", "bin", "quantile", "factor")
+      ),
+      selectInput(
+        NS(id, "palette"),
+        label = "Select colour palette:",
+        choices = c(
+          # Viridis palettes
+          "viridis",
+          "magma",
+          "plasma",
+          "inferno",
+          # RColorBrewer palettes
+          "BrBG",
+          "PiYG",
+          "PRGn",
+          "PuOr",
+          "RdBu",
+          "RdYlBu",
+          "RdGy",
+          "RdYlGn",
+          "Spectral",
+          "Dark2",
+          "Paired",
+          "Set1",
+          "Set2",
+          "Set3",
+          "Accent",
+          "Pastel1",
+          "Pastel2",
+          "Blues",
+          "BuGn",
+          "BuPu",
+          "GnBu",
+          "Greens",
+          "Greys",
+          "Oranges",
+          "OrRd",
+          "PuBu",
+          "PuBuGn",
+          "PuRd",
+          "Purples",
+          "RdPu",
+          "Reds",
+          "YlGn",
+          "YlGnBu",
+          "YlOrBr",
+          "YlOrRd"
+        ),
+      ),
+      numericInput(
+        NS(id, "alpha"),
+        label = "Select color transparency level: ",
+        value = 0.8,
+        min = 0,
+        max = 1
+      ),
+      checkboxInput(
+        NS(id, "reverse"),
+        label = "Should the colors be computed in reverse order?"
+      ),
+      selectInput(
+        NS(id, "apply_to"),
+        label = "Should colors by applied to the cell background or the text?",
+        choices = c("fill", "text")
+      ),
       gt_output(
         NS(id, "table")
       )
