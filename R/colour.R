@@ -132,18 +132,14 @@ new_colour_gt_block <- function(
 
   server <- function(id, gt_obj) {
     moduleServer(id, function(input, output, session) {
-      # Initialise module with ctor values
-      columns <- reactiveVal()
-      rows <- reactiveVal()
-      direction <- reactiveVal()
-      method <- reactiveVal()
-      palette <- reactiveVal()
-
-      # Update values from the UI
+      updateSelectInput(
+        session,
+        "columns",
+        choices = isolate(gt_obj())$`_boxhead`$column_label
+      )
 
       output$table <- render_gt({
-        gt_obj() |>
-          data_color()
+        gt_obj()
       })
 
       list(
@@ -165,7 +161,12 @@ new_colour_gt_block <- function(
           rows = reactive(rows()),
           direction = reactive(direction()),
           method = reactive(method()),
-          palette = reactive(palette())
+          palette = reactive(palette()),
+          bins = reactive(integer()),
+          quantiles = reactive(integer()),
+          alpha = reactive(numeric()),
+          reverse = reactive(logical()),
+          apply_to = reactive(character())
         )
       )
     })
