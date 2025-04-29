@@ -221,11 +221,11 @@ new_colour_gt_block <- function(
           direction = reactive(input$direction),
           method = reactive(input$method),
           palette = reactive(input$palette),
-          bins = reactive(input$integer),
-          quantiles = reactive(input$integer),
-          alpha = reactive(input$numeric),
-          reverse = reactive(input$logical),
-          apply_to = reactive(input$character)
+          bins = reactive(input$bins),
+          quantiles = reactive(input$quantiles),
+          alpha = reactive(input$alpha),
+          reverse = reactive(input$reverse),
+          apply_to = reactive(input$apply_to)
         )
       )
     })
