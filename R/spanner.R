@@ -18,7 +18,7 @@ new_spanner_gt_block <- function(
   columns = character(),
   ...
 ) {
-  ui <- function(id, gt_obj) {
+  ui <- function(id) {
     tagList(
       textInput(
         NS(id, "label"),
@@ -28,7 +28,7 @@ new_spanner_gt_block <- function(
       selectInput(
         NS(id, "columns"),
         label = "Select columns:",
-        choices = gt_obj$`_boxhead`$column_label,
+        choices = NULL,
         multiple = TRUE
       ),
       gt_output(
@@ -43,6 +43,13 @@ new_spanner_gt_block <- function(
       label <- reactiveVal(label)
       columns <- reactiveVal(columns)
 
+      # Update column options with inputted gt_obj
+      updateSelectInput(
+        session,
+        "columns",
+        choices = isolate(gt_obj())$`_boxhead`$column_label
+      )
+
       # Update values from the UI
       observeEvent(input$label, label(input$label))
       observeEvent(input$columns, columns(input$columns))
@@ -56,7 +63,7 @@ new_spanner_gt_block <- function(
         expr = reactive(
           bquote(
             gt_obj() |>
-              tab_spanner(lable = .(label), columns = .(columns)),
+              tab_spanner(label = .(label), columns = .(columns)),
             list(
               label = label(),
               columns = columns()
