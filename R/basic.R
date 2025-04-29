@@ -37,9 +37,6 @@ new_basic_gt_block <- function(
         NS(id, "footnotes"),
         label = "Add footnotes (accepts markdown formatting)",
         value = footnotes
-      ),
-      gt_output(
-        NS(id, "table")
       )
     )
   }
@@ -55,12 +52,6 @@ new_basic_gt_block <- function(
       observeEvent(input$title, title(input$title))
       observeEvent(input$subtitle, subtitle(input$subtitle))
       observeEvent(input$footnotes, footnotes(input$footnotes))
-
-      output$table <- render_gt({
-        gt(data()) |>
-          tab_header(title = md(title()), subtitle = md(subtitle())) |>
-          tab_footnote(md(footnotes()))
-      })
 
       list(
         expr = reactive(
