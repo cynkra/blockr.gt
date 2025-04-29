@@ -12,7 +12,7 @@ formatted text.}
 
 \item{columns}{The columns to serve as components of the spanner.}
 
-\item{...}{Forwarded to \code{\link[=new_block]{new_block()}}}
+\item{...}{Forwarded to \code{\link[blockr.core:new_block]{blockr.core::new_block()}}}
 }
 \value{
 A gt block object with an added spanner.

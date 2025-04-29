@@ -7,7 +7,7 @@
 #' @param color One of "blue", "cyan", "pink", "green", "red", and "gray".
 #' @param striping Logical indicating whether optional row striping
 #'   should be enabled.
-#' @param ... Forwarded to [new_block()]
+#' @param ... Forwarded to [blockr.core::new_block()]
 #'
 #' @return A styled gt block object that can be used with the serve function.
 #'

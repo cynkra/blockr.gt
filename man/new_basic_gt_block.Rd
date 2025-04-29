@@ -15,7 +15,7 @@ new_basic_gt_block(
 \item{title, subtitle, footnotes}{Initial text for each field (character).
 All default to empty and accept markdown formatting.}
 
-\item{...}{Forwarded to \code{\link[=new_block]{new_block()}}}
+\item{...}{Forwarded to \code{\link[blockr.core:new_block]{blockr.core::new_block()}}}
 }
 \value{
 A basic gt block object that can be used with the serve function.

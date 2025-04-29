@@ -3,7 +3,7 @@
 #' @param label The text to use for the spanner label. Accepts markdown
 #'   formatted text.
 #' @param columns The columns to serve as components of the spanner.
-#' @param ... Forwarded to [new_block()]
+#' @param ... Forwarded to [blockr.core::new_block()]
 #'
 #' @return A gt block object with an added spanner.
 #'
