@@ -13,6 +13,13 @@
 #'   "factor". The "auto" method will automatically choose the "numeric" method
 #'   for numerical input data or the "factor" method for any non-numeric inputs.
 #' @param palette Name of the colour palette to use.
+#' @param bins Number of bins to use when method is "bin".
+#' @param quantiles Number of equal-sized quantiles to use when method is
+#'   "quantile".
+#' @param alpha Transparency level for colors.
+#' @param reverse Logical indicating whether colors should be computed in
+#'   reverse order.
+#' @param apply_to Whether colors should fill the cell background or the text.
 #' @param ... Forwarded to [blockr.core::new_block()]
 #'
 #' @return A gt block with additional cell colouring.
