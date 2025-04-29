@@ -53,7 +53,7 @@ new_colour_gt_block <- function(
       selectInput(
         NS(id, "direction"),
         label = "Should color computations be performed down columns or across rows?",
-        choices = c("columns", "row")
+        choices = c("column", "row")
       ),
       selectInput(
         NS(id, "method"),
