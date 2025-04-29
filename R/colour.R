@@ -112,7 +112,8 @@ new_colour_gt_block <- function(
         label = "Select color transparency level: ",
         value = 0.8,
         min = 0,
-        max = 1
+        max = 1,
+        step = 0.1
       ),
       checkboxInput(
         NS(id, "reverse"),
@@ -120,7 +121,7 @@ new_colour_gt_block <- function(
       ),
       selectInput(
         NS(id, "apply_to"),
-        label = "Should colors by applied to the cell background or the text?",
+        label = "Should colors fill the cell background or the text?",
         choices = c("fill", "text")
       ),
       gt_output(
