@@ -39,13 +39,13 @@ new_colour_gt_block <- function(
   ui <- function(id) {
     tagList(
       selectInput(
-        NS(id, columns),
+        NS(id, "columns"),
         label = "Select columns to color:",
         choices = NULL,
         multiple = TRUE
       ),
       selectInput(
-        NS(id, rows),
+        NS(id, "rows"),
         label = "Select rows to color:",
         choices = NULL,
         multiple = TRUE
@@ -157,16 +157,16 @@ new_colour_gt_block <- function(
           )
         ),
         state = list(
-          columns = reactive(columns()),
-          rows = reactive(rows()),
-          direction = reactive(direction()),
-          method = reactive(method()),
-          palette = reactive(palette()),
-          bins = reactive(integer()),
-          quantiles = reactive(integer()),
-          alpha = reactive(numeric()),
-          reverse = reactive(logical()),
-          apply_to = reactive(character())
+          columns = reactive(input$columns),
+          rows = reactive(input$rows),
+          direction = reactive(input$direction),
+          method = reactive(input$method),
+          palette = reactive(input$palette),
+          bins = reactive(input$integer),
+          quantiles = reactive(input$integer),
+          alpha = reactive(input$numeric),
+          reverse = reactive(input$logical),
+          apply_to = reactive(input$character)
         )
       )
     })
