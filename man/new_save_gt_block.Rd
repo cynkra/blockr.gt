@@ -11,7 +11,7 @@ new_save_gt_block(format = character(), expand = numeric(), ...)
 
 \item{expand}{Numeric, expansion factor for PNG output (default 10)}
 
-\item{...}{Forwarded to \code{\link[=new_block]{new_block()}}}
+\item{...}{Forwarded to \code{\link[blockr.core:new_block]{blockr.core::new_block()}}}
 }
 \value{
 Invisibly returns NULL, called for side effects

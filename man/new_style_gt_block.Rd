@@ -19,7 +19,7 @@ new_style_gt_block(
 \item{striping}{Logical indicating whether optional row striping
 should be enabled.}
 
-\item{...}{Forwarded to \code{\link[=new_block]{new_block()}}}
+\item{...}{Forwarded to \code{\link[blockr.core:new_block]{blockr.core::new_block()}}}
 }
 \value{
 A styled gt block object that can be used with the serve function.
