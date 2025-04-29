@@ -167,19 +167,35 @@ new_colour_gt_block <- function(
         expr = reactive(
           bquote(
             gt_obj() |>
-              data_color(),
+              data_color(
+                columns = .(columns),
+                rows = .(rows),
+                direction = .(direction),
+                method = .(method),
+                palette = .(palette),
+                bins = .(bins),
+                quantiles = .(quantiles),
+                alpha = .(alpha),
+                reverse = .(reverse),
+                apply_to = .(apply_to)
+              ),
             list(
-              columns = columns(),
-              rows = rows(),
-              direction = direction(),
-              method = method(),
-              palette = palette()
+              columns = input$columns,
+              rows = input$rows[1]:input$rows[2],
+              direction = input$direction,
+              method = input$method,
+              palette = input$palette,
+              bins = input$bins,
+              quantiles = input$quantiles,
+              alpha = input$alpha,
+              reverse = input$reverse,
+              apply_to = input$apply_to
             )
           )
         ),
         state = list(
           columns = reactive(input$columns),
-          rows = reactive(input$rows),
+          rows = reactive(input$rows[1]:input$rows[2]),
           direction = reactive(input$direction),
           method = reactive(input$method),
           palette = reactive(input$palette),
