@@ -44,11 +44,13 @@ new_colour_gt_block <- function(
         choices = NULL,
         multiple = TRUE
       ),
-      selectInput(
+      sliderInput(
         NS(id, "rows"),
-        label = "Select rows to color:",
-        choices = NULL,
-        multiple = TRUE
+        label = "Select range of row numbers to color:",
+        min = 1,
+        max = 10,
+        value = c(1, 1),
+        step = 1
       ),
       selectInput(
         NS(id, "direction"),
@@ -138,11 +140,18 @@ new_colour_gt_block <- function(
         choices = isolate(gt_obj())$`_boxhead`$column_label
       )
 
+      updateSliderInput(
+        session,
+        "rows",
+        max = nrow(isolate(gt_obj())$`_stub_df`),
+        value = c(1, nrow(isolate(gt_obj())$`_stub_df`))
+      )
+
       output$table <- render_gt({
         gt_obj() |>
           data_color(
             columns = input$columns,
-            rows = input$rows,
+            rows = input$rows[1]:input$rows[2],
             direction = input$direction,
             method = input$method,
             palette = input$palette,
