@@ -5,7 +5,7 @@
 #'
 #' @param format Vector of formats to save ("html", "pdf", "png")
 #' @param expand Numeric, expansion factor for PNG output (default 10)
-#' @param ... Forwarded to [new_block()]
+#' @param ... Forwarded to [blockr.core::new_block()]
 #'
 #' @return Invisibly returns NULL, called for side effects
 #'
