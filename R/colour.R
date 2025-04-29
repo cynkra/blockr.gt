@@ -62,6 +62,26 @@ new_colour_gt_block <- function(
         label = "Select method for computing color:",
         choices = c("auto", "numeric", "bin", "quantile", "factor")
       ),
+      conditionalPanel(
+        condition = "input.method == 'bin'",
+        numericInput(
+          NS(id, "bins"),
+          label = "Select the number of bins",
+          value = 8,
+          min = 2,
+          step = 1
+        )
+      ),
+      conditionalPanel(
+        condition = "input.method == 'quantile",
+        numericInput(
+          NS(id, "quantiles"),
+          label = "Select the number of (equal-size) quantiles:",
+          value = 4,
+          min = 1,
+          step = 1
+        )
+      ),
       selectInput(
         NS(id, "palette"),
         label = "Select colour palette:",
