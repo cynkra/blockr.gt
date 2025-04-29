@@ -70,17 +70,19 @@ new_colour_gt_block <- function(
           value = 8,
           min = 2,
           step = 1
-        )
+        ),
+        ns = NS(id)
       ),
       conditionalPanel(
-        condition = "input.method == 'quantile",
+        condition = "input.method == 'quantile'",
         numericInput(
           NS(id, "quantiles"),
           label = "Select the number of (equal-size) quantiles:",
           value = 4,
           min = 1,
           step = 1
-        )
+        ),
+        ns = NS(id)
       ),
       selectInput(
         NS(id, "palette"),
