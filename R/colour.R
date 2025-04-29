@@ -14,7 +14,7 @@
 #'   "factor". The "auto" method will automatically choose the "numeric" method
 #'   for numerical input data or the "factor" method for any non-numeric inputs.
 #' @param palette Name of the colour palette to use.
-#' @param ... Forwarded to [new_block()]
+#' @param ... Forwarded to [blockr.core::new_block()]
 #'
 #' @return A gt block with additional cell colouring.
 #'
