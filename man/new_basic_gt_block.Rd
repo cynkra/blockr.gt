@@ -26,7 +26,7 @@ block provides an interface for a basic GT table.
 }
 \examples{
 \dontrun{
-serve(new_basic_gt_block(), data = list(data = mtcars))
+serve(new_basic_gt_block(title = "test"), data = list(data = mtcars))
 }
 
 }
