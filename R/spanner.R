@@ -39,24 +39,15 @@ new_spanner_gt_block <- function(
 
   server <- function(id, gt_obj) {
     moduleServer(id, function(input, output, session) {
-      # Initialise module with ctor values
-      label <- reactiveVal(label)
-      columns <- reactiveVal(columns)
-
-      # Update column options with inputted gt_obj
       updateSelectInput(
         session,
         "columns",
         choices = isolate(gt_obj())$`_boxhead`$column_label
       )
 
-      # Update values from the UI
-      observeEvent(input$label, label(input$label))
-      observeEvent(input$columns, columns(input$columns))
-
       output$table <- render_gt({
         gt_obj() |>
-          tab_spanner(label = label(), columns = columns())
+          tab_spanner(label = input$label, columns = input$columns)
       })
 
       list(
@@ -65,14 +56,14 @@ new_spanner_gt_block <- function(
             gt_obj() |>
               tab_spanner(label = .(label), columns = .(columns)),
             list(
-              label = label(),
-              columns = columns()
+              label = input$label,
+              columns = input$columns
             )
           )
         ),
         state = list(
-          label = reactive(label()),
-          columns = reactive(columns())
+          label = reactive(input$label),
+          columns = reactive(input$columns)
         )
       )
     })

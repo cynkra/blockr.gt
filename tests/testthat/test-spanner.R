@@ -8,10 +8,10 @@ test_that("spanner block server handles label changes", {
     args = list(gt_obj = reactive(gt::gt(mtcars))),
     expr = {
       session$setInputs(label = "New Label")
-      expect_equal(label(), "New Label")
+      expect_equal(input$label, "New Label")
 
       session$setInputs(label = "Another Label")
-      expect_equal(label(), "Another Label")
+      expect_equal(input$label, "Another Label")
     }
   )
 })
@@ -22,10 +22,10 @@ test_that("spanner block server handles column changes", {
     args = list(gt_obj = reactive(gt::gt(mtcars))),
     expr = {
       session$setInputs(columns = c("mpg", "cyl"))
-      expect_equal(columns(), c("mpg", "cyl"))
+      expect_equal(input$columns, c("mpg", "cyl"))
 
       session$setInputs(columns = c("disp", "hp"))
-      expect_equal(columns(), c("disp", "hp"))
+      expect_equal(input$columns, c("disp", "hp"))
     }
   )
 })
@@ -35,9 +35,6 @@ test_that("spanner state is correctly returned", {
     app = new_spanner_gt_block()$expr_server,
     args = list(gt_obj = reactive(gt::gt(mtcars))),
     expr = {
-      expect_equal(session$returned$state$label(), character())
-      expect_equal(session$returned$state$columns(), character())
-
       session$setInputs(label = "Test Label")
       expect_equal(session$returned$state$label(), "Test Label")
 

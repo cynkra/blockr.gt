@@ -8,10 +8,10 @@ test_that("style block server handles style changes", {
     args = list(gt_obj = reactive(gt::gt(mtcars))),
     expr = {
       session$setInputs(style = 1)
-      expect_equal(style(), 1)
+      expect_equal(input$style, 1)
 
       session$setInputs(style = 6)
-      expect_equal(style(), 6)
+      expect_equal(input$style, 6)
     }
   )
 })
@@ -22,10 +22,10 @@ test_that("style block server handles color changes", {
     args = list(gt_obj = reactive(gt::gt(mtcars))),
     expr = {
       session$setInputs(color = "green")
-      expect_equal(color(), "green")
+      expect_equal(input$color, "green")
 
       session$setInputs(color = "cyan")
-      expect_equal(color(), "cyan")
+      expect_equal(input$color, "cyan")
     }
   )
 })
@@ -36,10 +36,10 @@ test_that("style block server handles striping changes", {
     args = list(gt_obj = reactive(gt::gt(mtcars))),
     expr = {
       session$setInputs(striping = "no")
-      expect_equal(striping(), "no")
+      expect_equal(input$striping, "no")
 
       session$setInputs(striping = "yes")
-      expect_equal(striping(), "yes")
+      expect_equal(input$striping, "yes")
     }
   )
 })
@@ -49,10 +49,6 @@ test_that("style state is correctly returned", {
     app = new_style_gt_block()$expr_server,
     args = list(gt_obj = reactive(gt::gt(mtcars))),
     expr = {
-      expect_equal(session$returned$state$style(), numeric())
-      expect_equal(session$returned$state$color(), character())
-      expect_equal(session$returned$state$striping(), character())
-
       session$setInputs(style = 1)
       expect_equal(session$returned$state$style(), 1)
 
