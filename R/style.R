@@ -7,7 +7,7 @@
 #' @param color One of "blue", "cyan", "pink", "green", "red", and "gray".
 #' @param striping Logical indicating whether optional row striping
 #'   should be enabled.
-#' @param ... Forwarded to [new_block()]
+#' @param ... Forwarded to [blockr.core::new_block()]
 #'
 #' @return A styled gt block object that can be used with the serve function.
 #'
@@ -18,17 +18,25 @@
 #'
 #' @export
 new_style_gt_block <- function(
-  style = numeric(),
-  color = character(),
-  striping = character(),
+  style = 1,
+  color = "gray",
+  striping = "yes",
   ...
 ) {
+  if (style < 1 | style > 6) stop("`style` must be a value from 1-6")
+
+  color_choices <- c("blue", "cyan", "pink", "green", "red", "gray")
+  match.arg(color, color_choices)
+
+  striping_choices <- c("yes", "no")
+  match.arg(striping, striping_choices)
+
   ui <- function(id) {
     tagList(
       numericInput(
         NS(id, "style"),
         label = "Choose a default style from 1 to 6:",
-        value = 1,
+        value = style,
         min = 1,
         max = 6,
         step = 1
@@ -36,42 +44,20 @@ new_style_gt_block <- function(
       selectInput(
         NS(id, "color"),
         label = "Select color:",
-        choices = c("blue", "cyan", "pink", "green", "red", "gray"),
-        selected = "gray"
+        choices = color_choices,
+        selected = color
       ),
       selectInput(
         NS(id, "striping"),
         label = "Should rows be striped?",
-        choices = c("yes", "no"),
-        selected = "yes"
-      ),
-      gt_output(
-        NS(id, "table")
+        choices = striping_choices,
+        selected = striping
       )
     )
   }
 
   server <- function(id, gt_obj) {
     moduleServer(id, function(input, output, session) {
-      # Initialise module with ctor values
-      style <- reactiveVal(style)
-      color <- reactiveVal(color)
-      striping <- reactiveVal(striping)
-
-      # Update values from the UI
-      observeEvent(input$style, style(input$style))
-      observeEvent(input$color, color(input$color))
-      observeEvent(input$striping, striping(input$striping))
-
-      output$table <- render_gt({
-        gt_obj() |>
-          opt_stylize(
-            style = style(),
-            color = color(),
-            add_row_striping = ifelse(striping() == "yes", TRUE, FALSE)
-          )
-      })
-
       list(
         expr = reactive(
           bquote(
@@ -82,16 +68,16 @@ new_style_gt_block <- function(
                 add_row_striping = ifelse(.(striping) == "yes", TRUE, FALSE)
               ),
             list(
-              style = style(),
-              color = color(),
-              striping = striping()
+              style = input$style,
+              color = input$color,
+              striping = input$striping
             )
           )
         ),
         state = list(
-          style = reactive(style()),
-          color = reactive(color()),
-          striping = reactive(striping())
+          style = reactive(input$style),
+          color = reactive(input$color),
+          striping = reactive(input$striping)
         )
       )
     })

@@ -5,7 +5,7 @@
 #'
 #' @param title,subtitle,footnotes Initial text for each field (character).
 #' All default to empty and accept markdown formatting.
-#' @param ... Forwarded to [new_block()]
+#' @param ... Forwarded to [blockr.core::new_block()]
 #'
 #' @return A basic gt block object that can be used with the serve function.
 #'
@@ -43,16 +43,6 @@ new_basic_gt_block <- function(
 
   server <- function(id, data) {
     moduleServer(id, function(input, output, session) {
-      # The module must first be initialised with the values from the ctor
-      title <- reactiveVal(title)
-      subtitle <- reactiveVal(subtitle)
-      footnotes <- reactiveVal(footnotes)
-
-      # The initial values can then be updated with values from the UI
-      observeEvent(input$title, title(input$title))
-      observeEvent(input$subtitle, subtitle(input$subtitle))
-      observeEvent(input$footnotes, footnotes(input$footnotes))
-
       list(
         expr = reactive(
           bquote(
@@ -60,16 +50,16 @@ new_basic_gt_block <- function(
               tab_header(title = md(.(title)), subtitle = md(.(subtitle))) |>
               tab_footnote(md(.(footnotes))),
             list(
-              title = title(),
-              subtitle = subtitle(),
-              footnotes = footnotes()
+              title = input$title,
+              subtitle = input$subtitle,
+              footnotes = input$footnotes
             )
           )
         ),
         state = list(
-          title = reactive(title()),
-          subtitle = reactive(subtitle()),
-          footnotes = reactive(footnotes())
+          title = reactive(input$title),
+          subtitle = reactive(input$subtitle),
+          footnotes = reactive(input$footnotes)
         )
       )
     })

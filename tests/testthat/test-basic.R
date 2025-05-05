@@ -8,10 +8,10 @@ test_that("basic block server handles title changes", {
     args = list(data = reactive(mtcars)),
     expr = {
       session$setInputs(title = "New Title")
-      expect_equal(title(), "New Title")
+      expect_equal(input$title, "New Title")
 
       session$setInputs(title = "Another Title")
-      expect_equal(title(), "Another Title")
+      expect_equal(input$title, "Another Title")
     }
   )
 })
@@ -22,10 +22,10 @@ test_that("basic block server handles subtitle changes", {
     args = list(data = reactive(mtcars)),
     expr = {
       session$setInputs(subtitle = "New Subtitle")
-      expect_equal(subtitle(), "New Subtitle")
+      expect_equal(input$subtitle, "New Subtitle")
 
       session$setInputs(subtitle = "Another Subtitle")
-      expect_equal(subtitle(), "Another Subtitle")
+      expect_equal(input$subtitle, "Another Subtitle")
     }
   )
 })
@@ -36,10 +36,10 @@ test_that("basic block server handles footnotes changes", {
     args = list(data = reactive(mtcars)),
     expr = {
       session$setInputs(footnotes = "New Footnote")
-      expect_equal(footnotes(), "New Footnote")
+      expect_equal(input$footnotes, "New Footnote")
 
       session$setInputs(footnotes = "Another Footnote")
-      expect_equal(footnotes(), "Another Footnote")
+      expect_equal(input$footnotes, "Another Footnote")
     }
   )
 })
@@ -49,10 +49,6 @@ test_that("block state is correctly returned", {
     app = new_basic_gt_block()$expr_server,
     args = list(data = reactive(mtcars)),
     expr = {
-      expect_equal(session$returned$state$title(), character())
-      expect_equal(session$returned$state$subtitle(), character())
-      expect_equal(session$returned$state$footnotes(), character())
-
       session$setInputs(title = "Test Title")
       expect_equal(session$returned$state$title(), "Test Title")
 
