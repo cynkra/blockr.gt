@@ -15,18 +15,23 @@
 #' }
 #'
 #' @export
-new_save_gt_block <- function(format = character(), expand = numeric(), ...) {
+new_save_gt_block <- function(format = "pdf", expand = 10, ...) {
+  format_choices <- c("pdf", "html", "png")
+  match.arg(format, format_choices)
+  if (expand < 1 | expand > 100) stop("Expand must be between 1-100")
+
   ui <- function(id) {
     tagList(
       selectInput(
         NS(id, "format"),
         label = "File format",
-        choices = c("pdf", "html", "png")
+        choices = format_choices,
+        selected = format
       ),
       numericInput(
         NS(id, "expand"),
         label = "Expansion factor to prevent cropping (png only)",
-        value = 10,
+        value = expand,
         min = 1,
         max = 100
       ),
@@ -39,20 +44,14 @@ new_save_gt_block <- function(format = character(), expand = numeric(), ...) {
 
   server <- function(id, gt_obj) {
     moduleServer(id, function(input, output, session) {
-      format <- reactiveVal(format)
-      expand <- reactiveVal(expand)
-
-      observeEvent(input$format, format(input$format))
-      observeEvent(input$expand, expand(input$expand))
-
       output$download <- downloadHandler(
-        filename = reactive(paste0("gt-table", ".", format())),
+        filename = reactive(paste0("gt-table", ".", input$format)),
         content = \(file) {
           switch(
-            format(),
+            input$format,
             pdf = gtsave(gt_obj(), filename = file),
             html = gtsave(gt_obj(), filename = file, inline_css = TRUE),
-            png = gtsave(gt_obj(), filename = file, expand = expand())
+            png = gtsave(gt_obj(), filename = file, expand = input$expand)
           )
         }
       )
@@ -70,15 +69,15 @@ new_save_gt_block <- function(format = character(), expand = numeric(), ...) {
               )
             },
             list(
-              format = format(),
-              expand = expand()
+              format = input$format,
+              expand = input$expand
             )
           )
         ) |>
           bindEvent(output$download),
         state = list(
-          format = reactive(format()),
-          expand = reactive(expand())
+          format = reactive(input$format),
+          expand = reactive(input$expand)
         )
       )
     })

@@ -46,20 +46,10 @@ new_basic_gt_block <- function(
 
   server <- function(id, data) {
     moduleServer(id, function(input, output, session) {
-      # The module must first be initialised with the values from the ctor
-      title <- reactiveVal(title)
-      subtitle <- reactiveVal(subtitle)
-      footnotes <- reactiveVal(footnotes)
-
-      # The initial values can then be updated with values from the UI
-      observeEvent(input$title, title(input$title))
-      observeEvent(input$subtitle, subtitle(input$subtitle))
-      observeEvent(input$footnotes, footnotes(input$footnotes))
-
       output$table <- render_gt({
         gt(data()) |>
-          tab_header(title = md(title()), subtitle = md(subtitle())) |>
-          tab_footnote(md(footnotes()))
+          tab_header(title = md(input$title), subtitle = md(input$subtitle)) |>
+          tab_footnote(md(input$footnotes))
       })
 
       list(
@@ -69,16 +59,16 @@ new_basic_gt_block <- function(
               tab_header(title = md(.(title)), subtitle = md(.(subtitle))) |>
               tab_footnote(md(.(footnotes))),
             list(
-              title = title(),
-              subtitle = subtitle(),
-              footnotes = footnotes()
+              title = input$title,
+              subtitle = input$subtitle,
+              footnotes = input$footnotes
             )
           )
         ),
         state = list(
-          title = reactive(title()),
-          subtitle = reactive(subtitle()),
-          footnotes = reactive(footnotes())
+          title = reactive(input$title),
+          subtitle = reactive(input$subtitle),
+          footnotes = reactive(input$footnotes)
         )
       )
     })
