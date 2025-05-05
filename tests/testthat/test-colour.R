@@ -97,6 +97,20 @@ test_that("colour block server handles bins changes", {
   )
 })
 
+test_that("colour block server handles quantiles changes", {
+  testServer(
+    app = new_colour_gt_block()$expr_server,
+    args = list(gt_obj = reactive(gt::gt(mtcars))),
+    expr = {
+      session$setInputs(quantiles = 5)
+      expect_equal(input$quantiles, 5)
+
+      session$setInputs(quantiles = 10)
+      expect_equal(input$quantiles, 10)
+    }
+  )
+})
+
 test_that("colour block server handles alpha changes", {
   testServer(
     app = new_colour_gt_block()$expr_server,
