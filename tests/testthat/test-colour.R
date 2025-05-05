@@ -97,6 +97,20 @@ test_that("colour block server handles bins changes", {
   )
 })
 
+test_that("colour block server handles quantiles changes", {
+  testServer(
+    app = new_colour_gt_block()$expr_server,
+    args = list(gt_obj = reactive(gt::gt(mtcars))),
+    expr = {
+      session$setInputs(quantiles = 5)
+      expect_equal(input$quantiles, 5)
+
+      session$setInputs(quantiles = 10)
+      expect_equal(input$quantiles, 10)
+    }
+  )
+})
+
 test_that("colour block server handles alpha changes", {
   testServer(
     app = new_colour_gt_block()$expr_server,
@@ -139,34 +153,43 @@ test_that("colour block server handles apply_to changes", {
   )
 })
 
-# test_that("colour state is correctly returned", {
-#   testServer(
-#     app = new_colour_gt_block()$expr_server,
-#     args = list(gt_obj = reactive(gt::gt(mtcars))),
-#     expr = {
-#       expect_equal(session$returned$state$columns(), character())
-#       expect_equal(session$returned$state$rows(), numeric())
-#       expect_equal(session$returned$state$direction(), character())
-#       expect_equal(session$returned$state$method(), character())
-#       expect_equal(session$returned$state$palette(), character())
+test_that("colour state is correctly returned", {
+  testServer(
+    app = new_colour_gt_block()$expr_server,
+    args = list(gt_obj = reactive(gt::gt(mtcars))),
+    expr = {
+      session$setInputs(columns = c("mpg", "cyl"))
+      expect_equal(session$returned$state$columns(), c("mpg", "cyl"))
 
-#       session$setInputs(columns = c("mpg", "cyl"))
-#       expect_equal(session$returned$state$columns(), c("mpg", "cyl"))
+      session$setInputs(rows = c(1, 5))
+      expect_equal(session$returned$state$rows(), 1:5)
 
-#       session$setInputs(rows = c(1, 5))
-#       expect_equal(session$returned$state$rows(), 1:5)
+      session$setInputs(direction = "column")
+      expect_equal(session$returned$state$direction(), "column")
 
-#       session$setInputs(direction = "column")
-#       expect_equal(session$returned$state$direction(), "column")
+      session$setInputs(method = "bin")
+      expect_equal(session$returned$state$method(), "bin")
 
-#       session$setInputs(method = "bin")
-#       expect_equal(session$returned$state$method(), "bin")
+      session$setInputs(palette = "viridis")
+      expect_equal(session$returned$state$palette(), "viridis")
 
-#       session$setInputs(palette = "viridis")
-#       expect_equal(session$returned$state$palette(), "viridis")
-#     }
-#   )
-# })
+      session$setInputs(bins = 5)
+      expect_equal(session$returned$state$bins(), 5)
+
+      session$setInputs(quantiles = 5)
+      expect_equal(session$returned$state$quantiles(), 5)
+
+      session$setInputs(alpha = 0.2)
+      expect_equal(session$returned$state$alpha(), 0.2)
+
+      session$setInputs(reverse = TRUE)
+      expect_equal(session$returned$state$reverse(), TRUE)
+
+      session$setInputs(apply_to = "text")
+      expect_equal(session$returned$state$apply_to(), "text")
+    }
+  )
+})
 
 test_that("expr evaluates correctly", {
   testServer(
