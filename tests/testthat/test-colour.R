@@ -172,6 +172,21 @@ test_that("colour state is correctly returned", {
 
       session$setInputs(palette = "viridis")
       expect_equal(session$returned$state$palette(), "viridis")
+
+      session$setInputs(bins = 5)
+      expect_equal(session$returned$state$bins(), 5)
+
+      session$setInputs(quantiles = 5)
+      expect_equal(session$returned$state$quantiles(), 5)
+
+      session$setInputs(alpha = 0.2)
+      expect_equal(session$returned$state$alpha(), 0.2)
+
+      session$setInputs(reverse = TRUE)
+      expect_equal(session$returned$state$reverse(), TRUE)
+
+      session$setInputs(apply_to = "text")
+      expect_equal(session$returned$state$apply_to(), "text")
     }
   )
 })
