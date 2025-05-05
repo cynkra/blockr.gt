@@ -4,7 +4,7 @@
 \alias{new_save_gt_block}
 \title{Save a gt table to multiple formats}
 \usage{
-new_save_gt_block(format = character(), expand = numeric(), ...)
+new_save_gt_block(format = "pdf", expand = 10, ...)
 }
 \arguments{
 \item{format}{Vector of formats to save ("html", "pdf", "png")}

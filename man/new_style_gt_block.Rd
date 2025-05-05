@@ -4,12 +4,7 @@
 \alias{new_style_gt_block}
 \title{Style a GT block}
 \usage{
-new_style_gt_block(
-  style = numeric(),
-  color = character(),
-  striping = character(),
-  ...
-)
+new_style_gt_block(style = 1, color = "gray", striping = "yes", ...)
 }
 \arguments{
 \item{style}{Numeric from 1 to 6 indicating which prebuilt default to use.}
