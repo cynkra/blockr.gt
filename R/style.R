@@ -23,7 +23,7 @@ new_style_gt_block <- function(
   striping = "yes",
   ...
 ) {
-  if (style < 1 | style > 6) stop("`style` must be a value from 1-6")
+  if (style < 1 || style > 6) stop("`style` must be a value from 1-6")
 
   color_choices <- c("blue", "cyan", "pink", "green", "red", "gray")
   match.arg(color, color_choices)
