@@ -176,7 +176,7 @@ new_colour_gt_block <- function(
       list(
         expr = reactive(
           bquote(
-            gt_obj() |>
+            gt_obj |>
               data_color(
                 columns = .(columns),
                 rows = .(rows),
