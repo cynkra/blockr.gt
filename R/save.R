@@ -18,7 +18,7 @@
 new_save_gt_block <- function(format = "pdf", expand = 10, ...) {
   format_choices <- c("pdf", "html", "png")
   match.arg(format, format_choices)
-  if (expand < 1 | expand > 100) stop("Expand must be between 1-100")
+  if (expand < 1 || expand > 100) stop("Expand must be between 1-100")
 
   ui <- function(id) {
     tagList(
