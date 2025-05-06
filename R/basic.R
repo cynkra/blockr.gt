@@ -103,6 +103,7 @@ new_basic_gt_block <- function(
     ui = ui,
     server = server,
     class = "basic_block",
+    allow_empty_state = TRUE,
     ...
   )
 }
