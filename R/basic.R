@@ -66,7 +66,7 @@ new_basic_gt_block <- function(
         expr = reactive(
           bquote(
             {
-              gt_obj <- gt(data())
+              gt_obj <- gt(data)
 
               if (isTruthy(input$title) || isTruthy(input$subtitle)) {
                 gt_obj <- gt_obj |>
