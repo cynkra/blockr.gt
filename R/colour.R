@@ -223,6 +223,7 @@ new_colour_gt_block <- function(
     ui = ui,
     server = server,
     class = "colour_block",
+    allow_empty_state = TRUE,
     ...
   )
 }
