@@ -61,7 +61,7 @@ new_style_gt_block <- function(
       list(
         expr = reactive(
           bquote(
-            gt_obj() |>
+            gt_obj |>
               opt_stylize(
                 style = .(style),
                 color = .(color),
