@@ -45,7 +45,7 @@ new_spanner_gt_block <- function(
       list(
         expr = reactive(
           bquote(
-            gt_obj() |>
+            gt_obj |>
               tab_spanner(label = .(label), columns = .(columns)),
             list(
               label = input$label,
@@ -65,6 +65,7 @@ new_spanner_gt_block <- function(
     ui = ui,
     server = server,
     class = "spanner_block",
+    allow_empty_state = TRUE,
     ...
   )
 }
