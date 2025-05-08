@@ -32,7 +32,7 @@
 #' @export
 new_colour_gt_block <- function(
   columns = numeric(),
-  rows = character(),
+  rows = numeric(),
   direction = character(),
   method = character(),
   palette = character(),
@@ -56,7 +56,7 @@ new_colour_gt_block <- function(
         label = "Select range of row numbers to color:",
         min = 1,
         max = 10,
-        value = c(1, 1),
+        value = if (length(rows) > 0) rows else c(1, 10),
         step = 1
       ),
       selectInput(
@@ -169,8 +169,7 @@ new_colour_gt_block <- function(
       updateSliderInput(
         session,
         "rows",
-        max = nrow(isolate(gt_obj())$`_stub_df`),
-        value = c(1, nrow(isolate(gt_obj())$`_stub_df`))
+        max = nrow(isolate(gt_obj())$`_stub_df`)
       )
 
       list(
