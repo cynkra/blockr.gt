@@ -64,7 +64,7 @@ test_that("block state is correctly returned", {
 test_that("expr evaluates correctly", {
   testServer(
     app = new_basic_gt_block()$expr_server,
-    args = list(data = reactive(mtcars)),
+    args = list(data = mtcars),
     expr = {
       session$setInputs(title = "Test Title")
       session$setInputs(subtitle = "Test Subtitle")
