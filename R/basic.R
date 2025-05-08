@@ -68,7 +68,7 @@ new_basic_gt_block <- function(
             {
               gt_obj <- gt(data)
 
-              if (isTruthy(input$title) || isTruthy(input$subtitle)) {
+              if (isTruthy(title) || isTruthy(subtitle)) {
                 gt_obj <- gt_obj |>
                   tab_header(
                     title = md(.(title)),
@@ -76,7 +76,7 @@ new_basic_gt_block <- function(
                   )
               }
 
-              if (isTruthy(input$footnotes)) {
+              if (isTruthy(footnotes)) {
                 gt_obj <- gt_obj |>
                   tab_footnote(md(.(footnotes)))
               }
