@@ -194,7 +194,7 @@ test_that("colour state is correctly returned", {
 test_that("expr evaluates correctly", {
   testServer(
     app = new_colour_gt_block()$expr_server,
-    args = list(gt_obj = reactive(gt::gt(mtcars))),
+    args = list(gt_obj = reactive(gt(mtcars))),
     expr = {
       session$setInputs(columns = c("mpg", "disp"))
       session$setInputs(rows = c(1, 5))
@@ -205,6 +205,7 @@ test_that("expr evaluates correctly", {
       session$setInputs(reverse = FALSE)
       session$setInputs(apply_to = "fill")
 
+      gt_obj <- gt_obj()
       evaluated_expr <- eval(session$returned$expr())
       expect_s3_class(evaluated_expr, "gt_tbl")
     }
