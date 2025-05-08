@@ -48,7 +48,7 @@ new_colour_gt_block <- function(
       selectInput(
         NS(id, "columns"),
         label = "Select columns to color:",
-        choices = NULL,
+        choices = columns,
         multiple = TRUE
       ),
       sliderInput(
