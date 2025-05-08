@@ -5,7 +5,7 @@ test_that("save block constructor", {
 test_that("save block server handles format changes", {
   testServer(
     app = new_save_gt_block()$expr_server,
-    args = list(gt_obj = reactive(gt::gt(mtcars))),
+    args = list(gt_obj = reactive(gt(mtcars))),
     expr = {
       session$setInputs(format = "pdf")
       expect_equal(input$format, "pdf")
@@ -22,7 +22,7 @@ test_that("save block server handles format changes", {
 test_that("save block server handles expand parameter", {
   testServer(
     app = new_save_gt_block()$expr_server,
-    args = list(gt_obj = reactive(gt::gt(mtcars))),
+    args = list(gt_obj = reactive(gt(mtcars))),
     expr = {
       session$setInputs(expand = 5)
       expect_equal(input$expand, 5)
@@ -36,7 +36,7 @@ test_that("save block server handles expand parameter", {
 test_that("block state is correctly returned", {
   testServer(
     app = new_save_gt_block()$expr_server,
-    args = list(gt_obj = reactive(gt::gt(mtcars))),
+    args = list(gt_obj = reactive(gt(mtcars))),
     expr = {
       session$setInputs(format = "pdf")
       expect_equal(session$returned$state$format(), "pdf")
@@ -50,7 +50,7 @@ test_that("block state is correctly returned", {
 test_that("expr evaluates correctly", {
   testServer(
     app = new_save_gt_block()$expr_server,
-    args = list(gt_obj = reactive(gt::gt(head(mtcars, 5)))),
+    args = list(gt_obj = reactive(gt(head(mtcars, 5)))),
     expr = {
       withr::with_tempdir({
         session$setInputs(format = "png")

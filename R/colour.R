@@ -26,7 +26,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' serve(new_colour_gt_block(), data = list(gt_obj = gt::gt(head(mtcars))))
+#' serve(new_colour_gt_block(), data = list(gt_obj = gt(head(mtcars))))
 #' }
 #'
 #' @export

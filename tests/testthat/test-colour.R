@@ -5,7 +5,7 @@ test_that("colour block constructor", {
 test_that("colour block server handles column changes", {
   testServer(
     app = new_colour_gt_block()$expr_server,
-    args = list(gt_obj = reactive(gt::gt(mtcars))),
+    args = list(gt_obj = reactive(gt(mtcars))),
     expr = {
       session$setInputs(columns = c("mpg", "cyl"))
       expect_equal(input$columns, c("mpg", "cyl"))
@@ -19,7 +19,7 @@ test_that("colour block server handles column changes", {
 test_that("colour block server handles rows changes", {
   testServer(
     app = new_colour_gt_block()$expr_server,
-    args = list(gt_obj = reactive(gt::gt(mtcars))),
+    args = list(gt_obj = reactive(gt(mtcars))),
     expr = {
       session$setInputs(rows = c(1, 5))
       expect_equal(input$rows[1], 1)
@@ -35,7 +35,7 @@ test_that("colour block server handles rows changes", {
 test_that("colour block server handles direction changes", {
   testServer(
     app = new_colour_gt_block()$expr_server,
-    args = list(gt_obj = reactive(gt::gt(mtcars))),
+    args = list(gt_obj = reactive(gt(mtcars))),
     expr = {
       session$setInputs(direction = "column")
       expect_equal(input$direction, "column")
@@ -49,7 +49,7 @@ test_that("colour block server handles direction changes", {
 test_that("colour block server handles method changes", {
   testServer(
     app = new_colour_gt_block()$expr_server,
-    args = list(gt_obj = reactive(gt::gt(mtcars))),
+    args = list(gt_obj = reactive(gt(mtcars))),
     expr = {
       session$setInputs(method = "auto")
       expect_equal(input$method, "auto")
@@ -72,7 +72,7 @@ test_that("colour block server handles method changes", {
 test_that("colour block server handles palette changes", {
   testServer(
     app = new_colour_gt_block()$expr_server,
-    args = list(gt_obj = reactive(gt::gt(mtcars))),
+    args = list(gt_obj = reactive(gt(mtcars))),
     expr = {
       session$setInputs(palette = "viridis")
       expect_equal(input$palette, "viridis")
@@ -86,7 +86,7 @@ test_that("colour block server handles palette changes", {
 test_that("colour block server handles bins changes", {
   testServer(
     app = new_colour_gt_block()$expr_server,
-    args = list(gt_obj = reactive(gt::gt(mtcars))),
+    args = list(gt_obj = reactive(gt(mtcars))),
     expr = {
       session$setInputs(bins = 5)
       expect_equal(input$bins, 5)
@@ -100,7 +100,7 @@ test_that("colour block server handles bins changes", {
 test_that("colour block server handles quantiles changes", {
   testServer(
     app = new_colour_gt_block()$expr_server,
-    args = list(gt_obj = reactive(gt::gt(mtcars))),
+    args = list(gt_obj = reactive(gt(mtcars))),
     expr = {
       session$setInputs(quantiles = 5)
       expect_equal(input$quantiles, 5)
@@ -114,7 +114,7 @@ test_that("colour block server handles quantiles changes", {
 test_that("colour block server handles alpha changes", {
   testServer(
     app = new_colour_gt_block()$expr_server,
-    args = list(gt_obj = reactive(gt::gt(mtcars))),
+    args = list(gt_obj = reactive(gt(mtcars))),
     expr = {
       session$setInputs(alpha = 0.5)
       expect_equal(input$alpha, 0.5)
@@ -128,7 +128,7 @@ test_that("colour block server handles alpha changes", {
 test_that("colour block server handles reverse changes", {
   testServer(
     app = new_colour_gt_block()$expr_server,
-    args = list(gt_obj = reactive(gt::gt(mtcars))),
+    args = list(gt_obj = reactive(gt(mtcars))),
     expr = {
       session$setInputs(reverse = TRUE)
       expect_equal(input$reverse, TRUE)
@@ -142,7 +142,7 @@ test_that("colour block server handles reverse changes", {
 test_that("colour block server handles apply_to changes", {
   testServer(
     app = new_colour_gt_block()$expr_server,
-    args = list(gt_obj = reactive(gt::gt(mtcars))),
+    args = list(gt_obj = reactive(gt(mtcars))),
     expr = {
       session$setInputs(apply_to = "fill")
       expect_equal(input$apply_to, "fill")
@@ -156,7 +156,7 @@ test_that("colour block server handles apply_to changes", {
 test_that("colour state is correctly returned", {
   testServer(
     app = new_colour_gt_block()$expr_server,
-    args = list(gt_obj = reactive(gt::gt(mtcars))),
+    args = list(gt_obj = reactive(gt(mtcars))),
     expr = {
       session$setInputs(columns = c("mpg", "cyl"))
       expect_equal(session$returned$state$columns(), c("mpg", "cyl"))

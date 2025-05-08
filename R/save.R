@@ -11,7 +11,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' serve(new_save_gt_block(), data = list(gt_obj = gt::gt(mtcars)))
+#' serve(new_save_gt_block(), data = list(gt_obj = gt(mtcars)))
 #' }
 #'
 #' @export
