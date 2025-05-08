@@ -47,22 +47,29 @@ new_basic_gt_block <- function(
         expr = reactive(
           bquote(
             {
-              gt_obj <- gt(data)
+              gt(data) |>
+                tab_header(
+                  title = md(.(title)),
+                  subtitle = md(.(subtitle))
+                ) |>
+                tab_footnote(md(.(footnotes)))
 
-              if (isTruthy(title) || isTruthy(subtitle)) {
-                gt_obj <- gt_obj |>
-                  tab_header(
-                    title = md(.(title)),
-                    subtitle = md(.(subtitle))
-                  )
-              }
+              # gt_obj <- gt(data)
 
-              if (isTruthy(footnotes)) {
-                gt_obj <- gt_obj |>
-                  tab_footnote(md(.(footnotes)))
-              }
+              # if (isTruthy(title) || isTruthy(subtitle)) {
+              #   gt_obj <- gt_obj |>
+              #     tab_header(
+              #       title = md(.(title)),
+              #       subtitle = md(.(subtitle))
+              #     )
+              # }
 
-              gt_obj
+              # if (isTruthy(footnotes)) {
+              #   gt_obj <- gt_obj |>
+              #     tab_footnote(md(.(footnotes)))
+              # }
+
+              # gt_obj
             },
             list(
               title = input$title,
