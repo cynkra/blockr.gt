@@ -43,25 +43,6 @@ new_basic_gt_block <- function(
 
   server <- function(id, data) {
     moduleServer(id, function(input, output, session) {
-      output$table <- render_gt({
-        gt_obj <- gt(data())
-
-        if (isTruthy(input$title) || isTruthy(input$subtitle)) {
-          gt_obj <- gt_obj |>
-            tab_header(
-              title = md(input$title),
-              subtitle = md(input$subtitle)
-            )
-        }
-
-        if (isTruthy(input$footnotes)) {
-          gt_obj <- gt_obj |>
-            tab_footnote(md(input$footnotes))
-        }
-
-        gt_obj
-      })
-
       list(
         expr = reactive(
           bquote(
