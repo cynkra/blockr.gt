@@ -11,14 +11,14 @@
 #'
 #' @examples
 #' \dontrun{
-#' serve(new_save_gt_block(), data = list(gt_obj = gt::gt(mtcars)))
+#' serve(new_save_gt_block(), data = list(gt_obj = gt(mtcars)))
 #' }
 #'
 #' @export
 new_save_gt_block <- function(format = "pdf", expand = 10, ...) {
   format_choices <- c("pdf", "html", "png")
   match.arg(format, format_choices)
-  if (expand < 1 | expand > 100) stop("Expand must be between 1-100")
+  if (expand < 1 || expand > 100) stop("Expand must be between 1-100")
 
   ui <- function(id) {
     tagList(
@@ -63,9 +63,9 @@ new_save_gt_block <- function(format = "pdf", expand = 10, ...) {
               file <- paste0("gt-table", ".", .(format))
               switch(
                 .(format),
-                pdf = gtsave(gt_obj(), filename = file),
-                html = gtsave(gt_obj(), filename = file, inline_css = TRUE),
-                png = gtsave(gt_obj(), filename = file, expand = .(expand))
+                pdf = gtsave(gt_obj, filename = file),
+                html = gtsave(gt_obj, filename = file, inline_css = TRUE),
+                png = gtsave(gt_obj, filename = file, expand = .(expand))
               )
             },
             list(

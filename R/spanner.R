@@ -9,7 +9,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' serve(new_spanner_gt_block(), data = list(gt_obj = gt::gt(mtcars)))
+#' serve(new_spanner_gt_block(), data = list(gt_obj = gt(mtcars)))
 #' }
 #'
 #' @export
@@ -30,9 +30,6 @@ new_spanner_gt_block <- function(
         label = "Select columns:",
         choices = NULL,
         multiple = TRUE
-      ),
-      gt_output(
-        NS(id, "table")
       )
     )
   }
@@ -45,15 +42,10 @@ new_spanner_gt_block <- function(
         choices = isolate(gt_obj())$`_boxhead`$column_label
       )
 
-      output$table <- render_gt({
-        gt_obj() |>
-          tab_spanner(label = input$label, columns = input$columns)
-      })
-
       list(
         expr = reactive(
           bquote(
-            gt_obj() |>
+            gt_obj |>
               tab_spanner(label = .(label), columns = .(columns)),
             list(
               label = input$label,
@@ -73,6 +65,7 @@ new_spanner_gt_block <- function(
     ui = ui,
     server = server,
     class = "spanner_block",
+    allow_empty_state = TRUE,
     ...
   )
 }

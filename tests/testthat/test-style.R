@@ -5,7 +5,7 @@ test_that("style block constructor", {
 test_that("style block server handles style changes", {
   testServer(
     app = new_style_gt_block()$expr_server,
-    args = list(gt_obj = reactive(gt::gt(mtcars))),
+    args = list(gt_obj = reactive(gt(mtcars))),
     expr = {
       session$setInputs(style = 1)
       expect_equal(input$style, 1)
@@ -19,7 +19,7 @@ test_that("style block server handles style changes", {
 test_that("style block server handles color changes", {
   testServer(
     app = new_style_gt_block()$expr_server,
-    args = list(gt_obj = reactive(gt::gt(mtcars))),
+    args = list(gt_obj = reactive(gt(mtcars))),
     expr = {
       session$setInputs(color = "green")
       expect_equal(input$color, "green")
@@ -33,7 +33,7 @@ test_that("style block server handles color changes", {
 test_that("style block server handles striping changes", {
   testServer(
     app = new_style_gt_block()$expr_server,
-    args = list(gt_obj = reactive(gt::gt(mtcars))),
+    args = list(gt_obj = reactive(gt(mtcars))),
     expr = {
       session$setInputs(striping = "no")
       expect_equal(input$striping, "no")
@@ -47,7 +47,7 @@ test_that("style block server handles striping changes", {
 test_that("style state is correctly returned", {
   testServer(
     app = new_style_gt_block()$expr_server,
-    args = list(gt_obj = reactive(gt::gt(mtcars))),
+    args = list(gt_obj = reactive(gt(mtcars))),
     expr = {
       session$setInputs(style = 1)
       expect_equal(session$returned$state$style(), 1)
@@ -64,11 +64,12 @@ test_that("style state is correctly returned", {
 test_that("expr evaluates correctly", {
   testServer(
     app = new_style_gt_block()$expr_server,
-    args = list(gt_obj = reactive(gt::gt(mtcars))),
+    args = list(gt_obj = reactive(gt(mtcars))),
     expr = {
       session$setInputs(style = 1)
       session$setInputs(color = "cyan")
       session$setInputs(striping = "yes")
+      gt_obj <- gt_obj()
       evaluated_expr <- eval(session$returned$expr())
       expect_s3_class(evaluated_expr, "gt_tbl")
     }
@@ -78,7 +79,7 @@ test_that("expr evaluates correctly", {
 test_that("incorrect colors throw an error", {
   testServer(
     app = new_style_gt_block()$expr_server,
-    args = list(gt_obj = reactive(gt::gt(mtcars))),
+    args = list(gt_obj = reactive(gt(mtcars))),
     expr = {
       session$setInputs(style = 1)
       session$setInputs(color = "Ooops")

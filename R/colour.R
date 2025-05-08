@@ -26,7 +26,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' serve(new_colour_gt_block(), data = list(gt_obj = gt::gt(head(mtcars))))
+#' serve(new_colour_gt_block(), data = list(gt_obj = gt(head(mtcars))))
 #' }
 #'
 #' @export
@@ -154,9 +154,6 @@ new_colour_gt_block <- function(
         NS(id, "apply_to"),
         label = "Should colors fill the cell background or the text?",
         choices = c("fill", "text")
-      ),
-      gt_output(
-        NS(id, "table")
       )
     )
   }
@@ -176,38 +173,26 @@ new_colour_gt_block <- function(
         value = c(1, nrow(isolate(gt_obj())$`_stub_df`))
       )
 
-      output$table <- render_gt({
-        gt_obj() |>
-          data_color(
-            columns = input$columns,
-            rows = input$rows[1]:input$rows[2],
-            direction = input$direction,
-            method = input$method,
-            palette = input$palette,
-            bins = input$bins,
-            quantiles = input$quantiles,
-            alpha = input$alpha,
-            reverse = input$reverse,
-            apply_to = input$apply_to
-          )
-      })
-
       list(
         expr = reactive(
           bquote(
-            gt_obj() |>
-              data_color(
-                columns = .(columns),
-                rows = .(rows),
-                direction = .(direction),
-                method = .(method),
-                palette = .(palette),
-                bins = .(bins),
-                quantiles = .(quantiles),
-                alpha = .(alpha),
-                reverse = .(reverse),
-                apply_to = .(apply_to)
-              ),
+            if (is.null(.(columns))) {
+              gt_obj
+            } else {
+              gt_obj |>
+                data_color(
+                  columns = .(columns),
+                  rows = .(rows),
+                  direction = .(direction),
+                  method = .(method),
+                  palette = .(palette),
+                  bins = .(bins),
+                  quantiles = .(quantiles),
+                  alpha = .(alpha),
+                  reverse = .(reverse),
+                  apply_to = .(apply_to)
+                )
+            },
             list(
               columns = input$columns,
               rows = input$rows[1]:input$rows[2],
@@ -242,6 +227,7 @@ new_colour_gt_block <- function(
     ui = ui,
     server = server,
     class = "colour_block",
+    allow_empty_state = TRUE,
     ...
   )
 }

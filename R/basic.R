@@ -37,41 +37,19 @@ new_basic_gt_block <- function(
         NS(id, "footnotes"),
         label = "Add footnotes (accepts markdown formatting)",
         value = footnotes
-      ),
-      gt_output(
-        NS(id, "table")
       )
     )
   }
 
   server <- function(id, data) {
     moduleServer(id, function(input, output, session) {
-      output$table <- render_gt({
-        gt_obj <- gt(data())
-
-        if (isTruthy(input$title) || isTruthy(input$subtitle)) {
-          gt_obj <- gt_obj |>
-            tab_header(
-              title = md(input$title),
-              subtitle = md(input$subtitle)
-            )
-        }
-
-        if (isTruthy(input$footnotes)) {
-          gt_obj <- gt_obj |>
-            tab_footnote(md(input$footnotes))
-        }
-
-        gt_obj
-      })
-
       list(
         expr = reactive(
           bquote(
             {
-              gt_obj <- gt(data())
+              gt_obj <- gt(data)
 
-              if (isTruthy(input$title) || isTruthy(input$subtitle)) {
+              if (isTruthy(.(title)) || isTruthy(.(subtitle))) {
                 gt_obj <- gt_obj |>
                   tab_header(
                     title = md(.(title)),
@@ -79,7 +57,7 @@ new_basic_gt_block <- function(
                   )
               }
 
-              if (isTruthy(input$footnotes)) {
+              if (isTruthy(.(footnotes))) {
                 gt_obj <- gt_obj |>
                   tab_footnote(md(.(footnotes)))
               }
@@ -106,6 +84,7 @@ new_basic_gt_block <- function(
     ui = ui,
     server = server,
     class = "basic_block",
+    allow_empty_state = TRUE,
     ...
   )
 }

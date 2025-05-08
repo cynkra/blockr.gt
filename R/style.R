@@ -13,7 +13,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' serve(new_style_gt_block(), data = list(gt_obj = gt::gt(head(mtcars))))
+#' serve(new_style_gt_block(), data = list(gt_obj = gt(head(mtcars))))
 #' }
 #'
 #' @export
@@ -23,7 +23,7 @@ new_style_gt_block <- function(
   striping = "yes",
   ...
 ) {
-  if (style < 1 | style > 6) stop("`style` must be a value from 1-6")
+  if (style < 1 || style > 6) stop("`style` must be a value from 1-6")
 
   color_choices <- c("blue", "cyan", "pink", "green", "red", "gray")
   match.arg(color, color_choices)
@@ -52,28 +52,16 @@ new_style_gt_block <- function(
         label = "Should rows be striped?",
         choices = striping_choices,
         selected = striping
-      ),
-      gt_output(
-        NS(id, "table")
       )
     )
   }
 
   server <- function(id, gt_obj) {
     moduleServer(id, function(input, output, session) {
-      output$table <- render_gt({
-        gt_obj() |>
-          opt_stylize(
-            style = input$style,
-            color = input$color,
-            add_row_striping = ifelse(input$striping == "yes", TRUE, FALSE)
-          )
-      })
-
       list(
         expr = reactive(
           bquote(
-            gt_obj() |>
+            gt_obj |>
               opt_stylize(
                 style = .(style),
                 color = .(color),

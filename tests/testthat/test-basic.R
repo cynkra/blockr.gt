@@ -69,6 +69,7 @@ test_that("expr evaluates correctly", {
       session$setInputs(title = "Test Title")
       session$setInputs(subtitle = "Test Subtitle")
       session$setInputs(footnotes = "Test Footnote")
+      data <- data()
       evaluated_expr <- eval(session$returned$expr())
       expect_s3_class(evaluated_expr, "gt_tbl")
     }
