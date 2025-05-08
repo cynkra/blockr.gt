@@ -176,19 +176,23 @@ new_colour_gt_block <- function(
       list(
         expr = reactive(
           bquote(
-            gt_obj |>
-              data_color(
-                columns = .(columns),
-                rows = .(rows),
-                direction = .(direction),
-                method = .(method),
-                palette = .(palette),
-                bins = .(bins),
-                quantiles = .(quantiles),
-                alpha = .(alpha),
-                reverse = .(reverse),
-                apply_to = .(apply_to)
-              ),
+            if (is.null(.(columns))) {
+              gt_obj
+            } else {
+              gt_obj |>
+                data_color(
+                  columns = .(columns),
+                  rows = .(rows),
+                  direction = .(direction),
+                  method = .(method),
+                  palette = .(palette),
+                  bins = .(bins),
+                  quantiles = .(quantiles),
+                  alpha = .(alpha),
+                  reverse = .(reverse),
+                  apply_to = .(apply_to)
+                )
+            },
             list(
               columns = input$columns,
               rows = input$rows[1]:input$rows[2],
