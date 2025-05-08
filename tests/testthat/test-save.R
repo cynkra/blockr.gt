@@ -55,6 +55,7 @@ test_that("expr evaluates correctly", {
       withr::with_tempdir({
         session$setInputs(format = "png")
         session$setInputs(expand = 10)
+        gt_obj <- gt_obj()
         eval(session$returned$expr())
         expect_true(file.exists("gt-table.png"))
       })

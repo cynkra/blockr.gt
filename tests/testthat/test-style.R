@@ -69,6 +69,7 @@ test_that("expr evaluates correctly", {
       session$setInputs(style = 1)
       session$setInputs(color = "cyan")
       session$setInputs(striping = "yes")
+      gt_obj <- gt_obj()
       evaluated_expr <- eval(session$returned$expr())
       expect_s3_class(evaluated_expr, "gt_tbl")
     }

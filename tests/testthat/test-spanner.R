@@ -51,6 +51,7 @@ test_that("expr evaluates correctly", {
     expr = {
       session$setInputs(label = "Test Spanner")
       session$setInputs(columns = c("mpg", "cyl"))
+      gt_obj <- gt_obj()
       evaluated_expr <- eval(session$returned$expr())
       expect_s3_class(evaluated_expr, "gt_tbl")
     }
