@@ -5,6 +5,8 @@
 #'
 #' @param title,subtitle,footnotes Initial text for each field (character).
 #' All default to empty and accept markdown formatting.
+#' @param alignmentThe alignment of the title and subtitle elements in the table
+#' header.
 #' @param ... Forwarded to [blockr.core::new_block()]
 #'
 #' @return A basic gt block object that can be used with the serve function.
