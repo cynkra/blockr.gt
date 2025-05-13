@@ -5,6 +5,8 @@
 #'
 #' @param title,subtitle,footnotes Initial text for each field (character).
 #' All default to empty and accept markdown formatting.
+#' @param alignmentThe alignment of the title and subtitle elements in the table
+#' header.
 #' @param ... Forwarded to [blockr.core::new_block()]
 #'
 #' @return A basic gt block object that can be used with the serve function.
@@ -19,8 +21,12 @@ new_basic_gt_block <- function(
   title = character(),
   subtitle = character(),
   footnotes = character(),
+  alignment = "center",
   ...
 ) {
+  alignment_choices <- c("left", "center", "right")
+  match.arg(alignment, alignment_choices)
+
   ui <- function(id) {
     tagList(
       textInput(
@@ -37,6 +43,12 @@ new_basic_gt_block <- function(
         NS(id, "footnotes"),
         label = "Add footnotes (accepts markdown formatting)",
         value = footnotes
+      ),
+      selectInput(
+        NS(id, "alignment"),
+        label = "Where should the header (title and subtitle) be aligned?",
+        choices = alignment_choices,
+        selected = "center"
       )
     )
   }
@@ -62,19 +74,22 @@ new_basic_gt_block <- function(
                   tab_footnote(md(.(footnotes)))
               }
 
-              gt_obj
+              gt_obj |>
+                opt_align_table_header(align = .(alignment))
             },
             list(
               title = input$title,
               subtitle = input$subtitle,
-              footnotes = input$footnotes
+              footnotes = input$footnotes,
+              alignment = input$alignment
             )
           )
         ),
         state = list(
           title = reactive(input$title),
           subtitle = reactive(input$subtitle),
-          footnotes = reactive(input$footnotes)
+          footnotes = reactive(input$footnotes),
+          alignment = reactive(input$alignment)
         )
       )
     })
