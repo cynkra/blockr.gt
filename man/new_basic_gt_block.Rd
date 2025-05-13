@@ -16,10 +16,10 @@ new_basic_gt_block(
 \item{title, subtitle, footnotes}{Initial text for each field (character).
 All default to empty and accept markdown formatting.}
 
-\item{...}{Forwarded to \code{\link[blockr.core:new_block]{blockr.core::new_block()}}}
-
-\item{alignmentThe}{alignment of the title and subtitle elements in the table
+\item{alignment}{The alignment of the title and subtitle elements in the table
 header.}
+
+\item{...}{Forwarded to \code{\link[blockr.core:new_block]{blockr.core::new_block()}}}
 }
 \value{
 A basic gt block object that can be used with the serve function.
